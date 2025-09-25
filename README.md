@@ -1,46 +1,205 @@
-# Getting Started with Create React App
+# SGDE Frontend - Sistema de Gerenciamento de Doações para Emergências
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📋 Sobre o Projeto
+Frontend desenvolvido em **React.js com TypeScript** para a **Atividade Extensionista II** do curso de **Análise e Desenvolvimento de Sistemas** - UNINTER.
 
-## Available Scripts
+Interface moderna e responsiva para gerenciamento eficiente de doações em situações de emergência.
 
-In the project directory, you can run:
+## 🚀 Tecnologias Utilizadas
 
-### `npm start`
+- **React.js 18** - Biblioteca principal
+- **TypeScript** - Tipagem estática
+- **Vite** - Build tool e dev server
+- **Tailwind CSS** - Estilização
+- **React Hook Form** - Gerenciamento de formulários
+- **React Router DOM** - Roteamento
+- **Axios** - Cliente HTTP
+- **Lucide React** - Ícones
+- **React Query** - Gerenciamento de estado server-side
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📁 Estrutura do Projeto
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── ui/             # Componentes de interface
+│   │   ├── Button.tsx
+│   │   ├── Modal.tsx
+│   │   └── Loading.tsx
+│   ├── SvgList.tsx     # Lista de itens com ícones
+│   ├── ItemForm.tsx    # Formulário de cadastro
+│   └── DonorList.tsx   # Lista de doadores
+├── pages/              # Páginas da aplicação
+│   ├── Login.tsx
+│   ├── Dashboard.tsx
+│   ├── Donors.tsx
+│   ├── Items.tsx
+│   └── Distribution.tsx
+├── services/           # Conexão com API
+│   └── api.ts
+├── types/              # Definições TypeScript
+│   └── index.ts
+├── contexts/           # Gerenciamento de estado
+│   └── AuthContext.tsx
+├── hooks/              # Custom hooks
+│   └── useAuth.ts
+├── utils/              # utilitários
+│   └── constants.ts
+├── styles/             # Estilos globais
+│   └── globals.css
+└── App.tsx             # Componente principal
+```
 
-### `npm test`
+## ⚙️ Funcionalidades Implementadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔐 Autenticação
+- [x] Login e logout de usuários
+- [x] Proteção de rotas privadas
+- [x] Validação de formulários
+- [x] Armazenamento seguro de tokens
 
-### `npm run build`
+### 📊 Gestão de Doações
+- [x] CRUD completo de doadores
+- [x] Cadastro e listagem de itens
+- [x] Interface responsiva para tablets e mobile
+- [x] Busca e filtros básicos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🎨 Interface
+- [x] Design system consistente
+- [x] Modo claro/escuro (opcional)
+- [x] Componentes acessíveis
+- [x] Loading states e feedback visual
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Como Executar o Projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Pré-requisitos
+- Node.js 16+
+- npm ou yarn
 
-### `npm run eject`
+### Instalação e Execução
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+# Clonar repositório
+git clone https://github.com/seu-usuario/sgde-frontend.git
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Entrar na pasta do projeto
+cd sgde-frontend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Instalar dependências
+npm install
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com suas configurações
 
-## Learn More
+# Executar em modo desenvolvimento
+npm run dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+O projeto estará disponível em `http://localhost:5173`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Comandos Disponíveis
+
+```bash
+# Desenvolvimento
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build para produção
+npm run preview      # Preview do build
+
+# Qualidade de código
+npm run lint         # ESLint
+npm run type-check   # Verificação TypeScript
+```
+
+## 🌐 Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+VITE_APP_TITLE=SGDE Frontend
+```
+
+## 📱 Responsividade
+
+O projeto é totalmente responsivo, com breakpoints para:
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px  
+- **Desktop**: > 1024px
+
+## 🔧 Desenvolvimento
+
+### Adicionando um Novo Componente
+
+1. Crie o arquivo em `src/components/`
+2. Defina as props TypeScript:
+```typescript
+interface ComponentProps {
+  title: string;
+  onAction: () => void;
+}
+```
+
+3. Exporte o componente:
+```typescript
+export const MeuComponente: React.FC<ComponentProps> = ({ title, onAction }) => {
+  return <div>{title}</div>;
+};
+```
+
+### Integração com API
+
+```typescript
+// Exemplo de uso da API
+import { api } from '../services/api';
+
+const fetchDonors = async () => {
+  const response = await api.get('/donors');
+  return response.data;
+};
+```
+
+## 🚀 Deploy
+
+### Deploy na Vercel (Recomendado)
+
+```bash
+# Instalar Vercel CLI
+npm i -g vercel
+
+# Fazer deploy
+vercel
+```
+
+### Deploy Manual
+
+```bash
+# Build do projeto
+npm run build
+
+# A pasta 'dist' estará pronta para deploy
+```
+
+## 📊 Scripts do Package.json
+
+```json
+{
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "preview": "vite preview",
+  "lint": "eslint src --ext ts,tsx",
+  "type-check": "tsc --noEmit"
+}
+```
+
+## 👥 Autor
+
+**Messazabiel Moreira**  
+- RU: 4660389
+- Curso: Análise e Desenvolvimento de Sistemas
+- Disciplina: Atividade Extensionista II
+- UNINTER - Centro Universitário Internacional
+
+## 📝 Licença
+
+Projeto acadêmico desenvolvido para a UNINTER.
