@@ -195,7 +195,6 @@ npm run build
 ## 👥 Autor
 
 **Messazabiel Moreira**  
-- RU: 4660389
 - Curso: Análise e Desenvolvimento de Sistemas
 - Disciplina: Atividade Extensionista II
 - UNINTER - Centro Universitário Internacional
